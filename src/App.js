@@ -6,8 +6,8 @@ import Productos from  './components/productos/Productos.js';
 function App() {
   return (
     <div className="App">
-    <Header/>
-    <productos/>
+      <Header/>
+      <Productos/>
     </div>
   );
 }
