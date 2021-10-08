@@ -45,6 +45,7 @@ export default function Productos({show,setShow,filterP,products,setProducts}) {
     const pro=carrito.filter((p)=>p.id!==c.id )
     console.log("PRO",pro)
     setCarrito(pro)
+    setCount(count-1)
   }
 
   return (
