@@ -21,12 +21,12 @@ export default function Productos() {
     {id:1,name:'Cama', precio:100.00, categoria:'proteina',ruta:"/images/cama.jpg"},
     {id:2,name:'Sala', precio:100.00, categoria:'proteina',ruta:"/images/sala3.jpg"},
     {id:3,name:'Sala', precio:100.00, categoria:'proteina',ruta:'/images/sala.jpg'},
-    {id:4,name:'bcaas', precio:200.00, categoria:'BCAAS',ruta:'/images/pro1.png'},
-    {id:5,name:'bcaas', precio:200.00, categoria:'BCAAS',ruta:'/images/pro1.png'},
-    {id:6,name:'bcaas', precio:200.00, categoria:'BCAAS',ruta:'/images/pro1.png'},
-    {id:7,name:'whey Standar', precio:100.00, categoria:'proteina',ruta:'/images/pro1.png'},
-    {id:8,name:'whey Standar', precio:100.00, categoria:'proteina',ruta:'/images/pro1.png'},
-    {id:9,name:'whey Standar', precio:100.00, categoria:'proteina',ruta:'/images/pro1.png'},
+    {id:4,name:'bcaas', precio:200.00, categoria:'BCAAS',ruta:'/images/mesa.jpg'},
+    {id:5,name:'bcaas', precio:200.00, categoria:'BCAAS',ruta:'/images/car2.jpg'},
+    {id:6,name:'bcaas', precio:200.00, categoria:'BCAAS',ruta:'/images/litera.jpeg'},
+    {id:7,name:'whey Standar', precio:100.00, categoria:'proteina',ruta:'/images/mesa2.jpg'},
+    {id:8,name:'whey Standar', precio:100.00, categoria:'proteina',ruta:'/images/sala2.jpg'},
+    {id:9,name:'whey Standar', precio:100.00, categoria:'proteina',ruta:'/images/sillon2.jpg'},
 ];
   const addShop= (e)=>{
     setCount(count+1);
