@@ -1,0 +1,11 @@
+products = [
+      {id:1,name:'Cama', precio:100.00, categoria:'dormitorio',ruta:'/images/cama.jpg',cantidad:0},
+      {id:2,name:'Sala', precio:100.00, categoria:'sillones',ruta:'/images/sala3.jpg',cantidad:0},
+      {id:3,name:'Sala', precio:100.00, categoria:'sillones',ruta:'/images/sala.jpg',cantidad:0},
+      {id:4,name:'Mesa', precio:200.00, categoria:'comedor',ruta:'/images/mesa.jpg',cantidad:0},
+      {id:5,name:'cama', precio:200.00, categoria:'dormitorio',ruta:'/images/car2.jpg',cantidad:0},
+      {id:6,name:'Litera', precio:200.00, categoria:'BCAAS',ruta:'/images/litera.jpeg',cantidad:0},
+      {id:7,name:'Mesa', precio:100.00, categoria:'comedor',ruta:'/images/mesa2.jpg',cantidad:0},
+      {id:8,name:'Sala', precio:100.00, categoria:'sillones',ruta:'/images/sala2.jpg',cantidad:0},
+      {id:9,name:'Sala', precio:100.00, categoria:'sillones',ruta:'/images/sillon2.jpg',cantidad:0},
+  ]

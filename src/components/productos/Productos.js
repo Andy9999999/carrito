@@ -1,63 +1,62 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import 'bootstrap/dist/css/bootstrap.css';
 import {Modal, Button} from "react-bootstrap";
 import { fab } from '@fortawesome/free-brands-svg-icons';
 import "./Productos.sass";
 import NumberFormat from 'react-number-format';
 
-export default function Productos() {
+export default function Productos({show,setShow,filterP,products,setProducts}) {
 
-  const [count,setCount]=useState(0);
-    const [countP,setCountP]=useState([]);
-  const [showM, setShowM] = useState(false);
-  const handleClose = () => setShowM(false);
-  const handleShowM = () => setShowM(true);
-  const [total,setTotal]=useState(0);
-  const [subtotal,setSubTotal]=useState(0);
-  const IVA =1.16;
-  const [carrito,setCarrito]=useState([]);
+  const handleClose = () => setShowM(false)
+  const handleShowM = () => setShowM(true)
+  const [count,setCount]=useState(null)
+  const [cant,setCant]=useState([])
+  const [showM, setShowM] = useState(false)
+  const [total,setTotal]=useState(0)
+  const [subtotal,setSubTotal]=useState(0)
+  const IVA =1.16
+  const [data,setData]=useState(products)
+  const [carrito,setCarrito]=useState([])
 
-  const products = [
-    {id:1,name:'Cama', precio:100.00, categoria:'proteina',ruta:"/images/cama.jpg"},
-    {id:2,name:'Sala', precio:100.00, categoria:'proteina',ruta:"/images/sala3.jpg"},
-    {id:3,name:'Sala', precio:100.00, categoria:'proteina',ruta:'/images/sala.jpg'},
-    {id:4,name:'bcaas', precio:200.00, categoria:'BCAAS',ruta:'/images/mesa.jpg'},
-    {id:5,name:'bcaas', precio:200.00, categoria:'BCAAS',ruta:'/images/car2.jpg'},
-    {id:6,name:'bcaas', precio:200.00, categoria:'BCAAS',ruta:'/images/litera.jpeg'},
-    {id:7,name:'whey Standar', precio:100.00, categoria:'proteina',ruta:'/images/mesa2.jpg'},
-    {id:8,name:'whey Standar', precio:100.00, categoria:'proteina',ruta:'/images/sala2.jpg'},
-    {id:9,name:'whey Standar', precio:100.00, categoria:'proteina',ruta:'/images/sillon2.jpg'},
-];
   const addShop= (e)=>{
-    setCount(count+1);
-    setSubTotal(subtotal+e.precio);
-    setTotal(total+e.precio*IVA);
+    setCount(count+1)
+    setSubTotal(subtotal+e.precio)
+    setTotal(total+e.precio*IVA)
+    e.cantidad+=1
 
-       setCarrito([...carrito,e])
-    // }
-    // let arr=[...carrito];
-
-
-    // arr[]=[...carrito];
+    var car=[...carrito]
+       if(car.length!==0)
+       {
+         const cn=car.filter((c)=>c.id===e.id )
+         console.log("filter",cn)
+         if(cn.length===0){
+           setCarrito([...carrito,e])
+         }
+      }
+       else {
+          setCarrito([e])
+       }
+      console.log("cantidad++",e.cantidad)
   }
-  const addCountP=(cant)=>{
-    setCountP({...countP,cant:cant})
-  }
-  //  const list = products.map(({info, key}) => <li key={key}>{info}</li>)  <button className="btn btnAdd" onClick={()=>{setCount(count+1);setTotal(pro.precio*IVA);setSubTotal(total+pro.precio)}}>ADD TO CART</button>-->
+  const delete1=(c)=>{
+    console.log("CCC",c)
 
- const AddCart =(e)=>{
- };
+      console.log("CAR",carrito)
+    const pro=carrito.filter((p)=>p.id!==c.id )
+    console.log("PRO",pro)
+    setCarrito(pro)
+  }
+
   return (
       <div id="principal">
-        <div className="container" >
-          <div className="col-12 col-md-6 col-sm-12">
-            <Button variant="primary" onClick={handleShowM}><i className="fas fa-shopping-cart"></i>: {count} productos</Button>
-          </div>
-          <span>Su carrito: {count} productos</span>
-          <div className="row">
-            {products.map(pro => (
-                <div className="col-6 col-md-4 col-sm-12 elem">
-                  <img src={pro.ruta} alt="name" className="img-fluid images"/>
+          <div className="container" >
+            <button className="btnIcon" type="text" onClick={handleShowM}><img src="/images/shop.png" className="icon"/> {count} </button>
+
+            {show ?(
+                <div className="row">
+              {filterP.map(pro => (
+                <div className="col-12 col-md-4 col-sm-12 elem">
+                  <img src={pro.ruta} alt="name" className="images"/>
                   <hr/>
                   <p>{pro.name}</p>
                   <p>${pro.precio}</p>
@@ -65,32 +64,63 @@ export default function Productos() {
                 </div>
             ))}
           </div>
-        </div>
-        <Modal scrollable="true" show={showM} onHide={handleClose} backdrop="static" keyboard={false}>
+        ):
+        (
+            <div className="row">
+              {products.map(pro => (
+                  <div className="col-12 col-md-4 col-sm-12 elem">
+                    <img src={pro.ruta} alt="name" className="images"/>
+                    <hr/>
+                    <p>{pro.name}</p>
+                    <p>${pro.precio}</p>
+                   <button className="btn btnAdd" onClick={()=>{addShop(pro)}}>ADD TO CART</button>
+                  </div>
+              ))}
+            </div>
+        )
+      }
+    </div>
+        <Modal size="md" scrollable="true" show={showM} onHide={handleClose}  keyboard={false}>
         <Modal.Header closeButton>
           <Modal.Title>Shopping cart</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        <p>Subtotal:{subtotal}</p>
-        <p>IVA: 16%</p>
-        <p>Total:<NumberFormat value={total} displayType={'text'} thousandSeparator={true} decimalScale={2} prefix={'$'} /></p>
-        <div className="container">
-          {carrito.map(car2 => (
-            <div className="col-6 col-md-4 col-sm-12 elem">
-              <img src={car2.ruta} alt="name" className="img-fluid images"/>
-              <p>Producto: {car2.name}  Precio: ${car2.precio} </p>
-              <input id="cant" type="number" name="inputcant" value={countP}
-                onChange={e=>{setCountP(e.target.value)}}/>
-              <hr/>
-            </div>
-          ))}
-          </div>
-          </Modal.Body>
-        <Modal.Footer>
-          <Button className="btn btnAdd"  onClick={handleClose}>Seguir comprando</Button>
-          <Button variant="success">Comprar</Button>
-        </Modal.Footer>
-      </Modal>
+          {carrito.length!==0 ?(<div>
+            <p>subtotal:{subtotal}</p>
+          <p>IVA: 16%</p>
+          <p>Total:<NumberFormat value={total} displayType={'text'} thousandSeparator={true} decimalScale={2} prefix={'$'} /></p>
+          <table>
+            <thead>
+              <tr>
+                <th>Articulo    </th>
+                <th>Nombre    </th>
+                <th>Precio</th>
+                <th>Cantidad</th>
+              </tr>
+          </thead>
+          <tbody>
+            {carrito.map(c => (
+                  <tr>
+                    <td><img src={c.ruta} alt="name" className="img-fluid imagesM"/></td>
+                    <td> {c.name}</td>
+                    <td> ${c.precio} </td>
+                    <td> {c.cantidad}</td>
+                    <td><button className="btn btnAdd" onClick={()=>{delete1(c)}}>ELIMINAR</button></td>
+                </tr>
+            ))}
+          </tbody>
+          </table>
+        </div>
+        ):
+        (
+          <div>No hay productos en el carrito</div>
+        )}
+        </Modal.Body>
+      <Modal.Footer>
+        <Button className="btn btnAdd"  onClick={handleClose}>Seguir comprando</Button>
+        <Button variant="success">Comprar</Button>
+      </Modal.Footer>
+  </Modal>
 </div>
   );
 }
